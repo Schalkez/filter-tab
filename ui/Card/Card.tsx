@@ -2,35 +2,14 @@ import { ProjectType } from '@/models';
 import React, { FC, memo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import styles from './styles.module.css';
 
 type Props = { project: ProjectType };
 
 export const Card: FC<Props> = memo(({ project }) => {
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleHover = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
-
   return (
     <Link href={project.link}>
-      <div
-        onMouseEnter={handleHover}
-        onMouseLeave={handleMouseOut}
-        className='rounded-md bg-gray-100 p-4'
-        style={{
-          position: 'relative',
-          transition: 'all ease-out 0.2s',
-          boxShadow: isHovering
-            ? '0px 18px 28px rgba(0, 0, 0, 0.14)'
-            : '0px 12px 28px rgba(0, 0, 0, 0.14)',
-          top: isHovering ? -3 : 0,
-        }}
-      >
+      <div className={`rounded-md bg-gray-100 p-4 ${styles.card_wrapper}`}>
         <div>
           <Image
             width={410}
@@ -40,24 +19,9 @@ export const Card: FC<Props> = memo(({ project }) => {
             alt={project.name}
           />
         </div>
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '3px',
-            width: '100%',
-            justifyContent: 'space-between',
-            padding: '16px',
-          }}
-        >
+        <div className={styles.title_wrapper}>
           <div
-            className='flex items-center rounded-md'
-            style={{
-              width: '100%',
-              justifyContent: 'space-between',
-              padding: '16px',
-              boxShadow: '0px 12px 28px rgba(0, 0, 0, 0.14)',
-              backgroundColor: 'white',
-            }}
+            className={`flex items-center rounded-md ${styles.title_wrapper_title}`}
           >
             <h3 className='text-base'>{project.name}</h3>
             <Image
@@ -65,7 +29,7 @@ export const Card: FC<Props> = memo(({ project }) => {
               alt='arrow-icon'
               width={10}
               height={10}
-              style={{ height: 10 }}
+              className={styles.title_wrapper_arrow}
             />
           </div>
         </div>

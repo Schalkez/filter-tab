@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, CancelToken } from "axios";
+import axios, { AxiosInstance, CancelToken } from 'axios';
 interface ApiRequest {}
 interface ApiResponse {}
 interface ApiParams {
@@ -14,7 +14,7 @@ type RequestOptions<P extends ApiParams> = {
 const generateClient = (host: string) => {
   const getDefaultParams = (): ApiParams => {
     return {
-      lang: "en",
+      lang: 'en',
     };
   };
 
@@ -28,7 +28,7 @@ const generateClient = (host: string) => {
   });
 
   function isTokenExpired(token: string) {
-    const expiry = JSON.parse(atob(token.split(".")[1])).exp;
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
     return Math.floor(new Date().getTime() / 1000) >= expiry;
   }
 
@@ -39,7 +39,7 @@ const generateClient = (host: string) => {
   >(
     path: string,
     request?: T,
-    options?: RequestOptions<P>,
+    options?: RequestOptions<P>
   ): Promise<R> => {
     return axiosInstance
       .get(encodeURI(path), {
@@ -63,7 +63,7 @@ const generateClient = (host: string) => {
   >(
     path: string,
     request: T,
-    options?: RequestOptions<P>,
+    options?: RequestOptions<P>
   ): Promise<R> => {
     return axiosInstance
       .post(path, request, {
@@ -83,7 +83,7 @@ const generateClient = (host: string) => {
   >(
     path: string,
     request: T,
-    options?: RequestOptions<P>,
+    options?: RequestOptions<P>
   ): Promise<R> => {
     return axiosInstance
       .put(path, request, {
@@ -103,7 +103,7 @@ const generateClient = (host: string) => {
   >(
     path: string,
     request?: T,
-    options?: RequestOptions<P>,
+    options?: RequestOptions<P>
   ): Promise<R> => {
     return axiosInstance
       .delete(path, {
@@ -125,4 +125,4 @@ const generateClient = (host: string) => {
   };
 };
 
-export const httpClient = generateClient("https://filter-tab.vercel.app/api");
+export const httpClient = generateClient('http://localhost:3000/api');
