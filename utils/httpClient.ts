@@ -125,4 +125,4 @@ const generateClient = (host: string) => {
   };
 };
 
-export const httpClient = generateClient('http://localhost:3000/api');
+export const httpClient = generateClient('https://filter-tab.vercel.app/api');
